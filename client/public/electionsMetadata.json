@@ -2,13 +2,13 @@
   {
     "id": 1,
     "name": "Student Council 2025",
-    "duration": 3600,
-    "endTime": 1765767129
+    "duration": 600,
+    "endTime": 1774990584
   },
   {
     "id": 2,
     "name": "Best Coding Language",
     "duration": 7200,
-    "endTime": 1765770729
+    "endTime": 1774997184
   }
 ]

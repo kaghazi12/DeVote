@@ -20,7 +20,7 @@ contract Voting {
     }
 
     // Admin hardcoded in contract for security (set at compile time)
-    address public admin = 0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
+    address public admin = 0x093Cda0c06d9E7920cD472273547edcD54aBDfa3;
     uint public electionCount;
     // Total votes across all elections
     uint public totalVotes;
@@ -43,9 +43,8 @@ contract Voting {
         _;
     }
 
-    // No constructor required; admin is hardcoded above.
 
-    // --- Admin functions ---
+    // main functions ---
     function createElection(string memory _name, string[] memory _candidateNames, uint256 _durationSeconds) public onlyAdmin {
         electionCount++;
         Election storage e = elections[electionCount];

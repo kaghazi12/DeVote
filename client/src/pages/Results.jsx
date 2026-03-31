@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CONTRACT_ADDRESS, CONTRACT_ABI, getElectionMetadata } from '../utils/contractConfig';
 import { BrowserProvider, Contract, JsonRpcProvider } from 'ethers';
+import ThemeToggle from '../components/ThemeToggle';
 
 export default function ResultsPage() {
   const [elections, setElections] = useState([]);
@@ -28,10 +29,10 @@ export default function ResultsPage() {
           const electionEndTime = Number(e.endTime);
           const hasTimeEnded = electionEndTime <= currentTimestamp;
           const shouldBeActive = e.isActive && !hasTimeEnded;
-          list.push({ 
-            id: Number(e.id), 
-            name: e.name, 
-            isActive: shouldBeActive, 
+          list.push({
+            id: Number(e.id),
+            name: e.name,
+            isActive: shouldBeActive,
             candidateCount: Number(e.candidateCount),
             endTime: electionEndTime
           });
@@ -59,7 +60,7 @@ export default function ResultsPage() {
       const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
 
       const e = await contract.getElection(Number(id));
-      
+
       // Calculate total votes from candidates for this election
       const candidateCount = Number(e.candidateCount);
       let electionTotalVotes = 0;
@@ -68,20 +69,20 @@ export default function ResultsPage() {
         electionTotalVotes += Number(cand.voteCount);
       }
       setTotalVotes(electionTotalVotes);
-      
+
       // Check if election time has ended - same logic as Vote.jsx
       const currentTime = await contract.getCurrentTimestamp();
       const currentTimestamp = Number(currentTime.toString());
       const electionEndTime = Number(e.endTime);
       const hasTimeEnded = electionEndTime <= currentTimestamp;
-      
+
       console.log(`Results fetchResults for election ${id}:`, {
         contractIsActive: e.isActive,
         endTime: electionEndTime,
         currentTime: currentTimestamp,
         hasTimeEnded: hasTimeEnded
       });
-      
+
       // If election time hasn't ended yet, show "ongoing" message
       if (!hasTimeEnded) {
         setResults({ ongoing: true });
@@ -112,18 +113,18 @@ export default function ResultsPage() {
     try {
       setAdvancingTime(true);
       const provider = new JsonRpcProvider('http://127.0.0.1:8545');
-      
+
       // Advance time by 4000 seconds using evm_increaseTime and mine a block
       console.log('Advancing time...');
       await provider.send('evm_increaseTime', [4000]);
       await provider.send('evm_mine', []);
-      
+
       // Reload elections and results
       const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
       const currentTime = await contract.getCurrentTimestamp();
       const currentTimestamp = Number(currentTime.toString());
       console.log(`Time advanced. Current blockchain timestamp: ${currentTimestamp}`);
-      
+
       const countBn = await contract.electionCount();
       const count = Number(countBn.toString());
       const list = [];
@@ -132,21 +133,21 @@ export default function ResultsPage() {
         const electionEndTime = Number(e.endTime);
         const hasTimeEnded = electionEndTime <= currentTimestamp;
         const shouldBeActive = e.isActive && !hasTimeEnded;
-        list.push({ 
-          id: Number(e.id), 
-          name: e.name, 
-          isActive: shouldBeActive, 
+        list.push({
+          id: Number(e.id),
+          name: e.name,
+          isActive: shouldBeActive,
           candidateCount: Number(e.candidateCount),
           endTime: electionEndTime
         });
       }
       setElections(list);
-      
+
       // Refresh results for current election
       if (selected) {
         fetchResults(selected);
       }
-      
+
       setSuccess('Time advanced by 1 hour');
       setTimeout(() => setSuccess(null), 3000);
     } catch (err) {
@@ -164,6 +165,7 @@ export default function ResultsPage() {
 
   return (
     <div className="container">
+      <ThemeToggle className="fixed bottom-3 right-3" />
       <h1 className="text-3xl font-bold mb-6 text-primary">Election Results</h1>
 
       <div className="mb-4">
@@ -224,7 +226,7 @@ export default function ResultsPage() {
         <div className="text-gray-500">Select an election to view results.</div>
       )}
 
-      <button 
+      <button
         onClick={advanceTime}
         disabled={advancingTime}
         className="fixed bottom-4 left-4 px-4 py-2 bg-background text-background rounded hover:bg-orange-600 disabled:bg-gray-400 z-50"

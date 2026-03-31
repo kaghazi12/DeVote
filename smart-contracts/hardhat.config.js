@@ -1,4 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config();  // ← make sure this line is there
 
 module.exports = {
   solidity: "0.8.28",
@@ -8,6 +9,10 @@ module.exports = {
       accounts: {
         mnemonic: "test test test test test test test test test test test junk"
       }
+    },
+    sepolia: {                              // ADD THIS BLOCK
+      url: process.env.SEPOLIA_RPC_URL,
+      accounts: [`0x${process.env.PRIVATE_KEY}`]
     }
   }
 };

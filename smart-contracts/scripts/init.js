@@ -4,7 +4,7 @@ const path = require("path");
 
 async function main() {
   const configPath = path.join(__dirname, "deployedAddress.json");
-  
+
   if (!fs.existsSync(configPath)) {
     console.error("Deployed address not found. Please run 'npx hardhat run scripts/deploy.js' first.");
     process.exitCode = 1;
@@ -20,7 +20,7 @@ async function main() {
   const voting = Voting.attach(votingAddress);
 
   // The contract hardcodes an admin address; find a signer that matches it
-  const HARD_CODED_ADMIN = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8".toLowerCase();
+  /*const HARD_CODED_ADMIN = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8".toLowerCase();
   const signers = await hre.ethers.getSigners();
   const adminSigner = signers.find(s => s.address.toLowerCase() === HARD_CODED_ADMIN);
   
@@ -29,7 +29,9 @@ async function main() {
     console.error("Please import the admin private key into your local node or update the contract admin.");
     process.exitCode = 1;
     return;
-  }
+  }*/
+  const [adminSigner] = await hre.ethers.getSigners();
+  console.log("Using admin account:", adminSigner.address);
 
   // Get current blockchain timestamp
   const currentBlock = await hre.ethers.provider.getBlock('latest');
@@ -37,7 +39,7 @@ async function main() {
   console.log("Current blockchain timestamp:", currentTimestamp);
 
   // Election durations (in seconds)
-  const election1Duration = 3600; // 10 seconds for testing
+  const election1Duration = 600; // 10 seconds for testing
   const election2Duration = 7200; // 1 hour
 
   const tx1 = await voting.connect(adminSigner).createElection("Student Council 2025", ["Alice", "Bob", "Charlie"], election1Duration);

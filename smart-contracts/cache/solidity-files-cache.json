@@ -38,8 +38,80 @@
       ]
     },
     "C:\\Users\\Gulraiz\\isprojvsc\\smart-contracts\\contracts\\Voting.sol": {
-      "lastModificationDate": 1765745293137,
-      "contentHash": "bcec00caf10625763851697769e1ab91",
+      "lastModificationDate": 1765753143903,
+      "contentHash": "442600b098b9c72bc8051108eb646dd6",
+      "sourceName": "contracts/Voting.sol",
+      "solcConfig": {
+        "version": "0.8.28",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Voting"
+      ]
+    },
+    "C:\\Users\\Gulraiz\\Desktop\\projs\\isprojvsc\\smart-contracts\\contracts\\Lock.sol": {
+      "lastModificationDate": 1765443537041,
+      "contentHash": "7eee587c347fe6b1de50c96688cb9477",
+      "sourceName": "contracts/Lock.sol",
+      "solcConfig": {
+        "version": "0.8.28",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.28"
+      ],
+      "artifacts": [
+        "Lock"
+      ]
+    },
+    "C:\\Users\\Gulraiz\\Desktop\\projs\\isprojvsc\\smart-contracts\\contracts\\Voting.sol": {
+      "lastModificationDate": 1774989266737,
+      "contentHash": "72823578255e46ce862b08a44983fe10",
       "sourceName": "contracts/Voting.sol",
       "solcConfig": {
         "version": "0.8.28",
