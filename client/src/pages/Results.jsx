@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CONTRACT_ADDRESS, CONTRACT_ABI, getElectionMetadata } from '../utils/contractConfig';
+import { CONTRACT_ADDRESS, CONTRACT_ABI } from '../utils/contractConfig';
 import { BrowserProvider, Contract, JsonRpcProvider } from 'ethers';
 import ThemeToggle from '../components/ThemeToggle';
 
