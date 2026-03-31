@@ -1,4 +1,4 @@
-﻿export const CONTRACT_ADDRESS = "0xBf5b212d8879Fbf97A15bE94683fa62eAcB099BF";
+export const CONTRACT_ADDRESS = "0xBf5b212d8879Fbf97A15bE94683fa62eAcB099BF";
 
 // Load elections metadata (created during init.js)
 let metadataPromise = fetch('/electionsMetadata.json')
