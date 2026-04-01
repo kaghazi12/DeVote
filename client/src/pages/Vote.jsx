@@ -22,7 +22,7 @@ export default function VotePage() {
       try {
         const provider = window.ethereum
           ? new BrowserProvider(window.ethereum)
-          : new JsonRpcProvider('http://127.0.0.1:8545');
+          : new JsonRpcProvider(process.env.REACT_APP_RPC_URL);
         const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
 
         const currentTime = await contract.getCurrentTimestamp();
@@ -82,7 +82,7 @@ export default function VotePage() {
 
         const provider = window.ethereum
           ? new BrowserProvider(window.ethereum)
-          : new JsonRpcProvider('http://127.0.0.1:8545');
+          : new JsonRpcProvider(process.env.REACT_APP_RPC_URL);
         const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
 
         const election = await contract.getElection(Number(selected));
@@ -145,7 +145,7 @@ export default function VotePage() {
       try {
         const provider = window.ethereum
           ? new BrowserProvider(window.ethereum)
-          : new JsonRpcProvider('http://127.0.0.1:8545');
+          : new JsonRpcProvider(process.env.REACT_APP_RPC_URL);
         const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
 
         const filter = contract.filters.ElectionConcluded();
@@ -181,7 +181,7 @@ export default function VotePage() {
       try {
         const provider = window.ethereum
           ? new BrowserProvider(window.ethereum)
-          : new JsonRpcProvider('http://127.0.0.1:8545');
+          : new JsonRpcProvider(process.env.REACT_APP_RPC_URL);
         const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
 
         const currentTime = await contract.getCurrentTimestamp();
@@ -271,6 +271,36 @@ export default function VotePage() {
           <span className="mr-2">✓</span> {success}
         </div>
       )}
+
+{/*added a banner when metamask isnt installed on user's browser*/}
+{/* MetaMask Warning Banner */}
+{!window.ethereum && (
+  <div className="mb-6 p-4 rounded-xl glass-panel flex items-center gap-4"
+    style={{
+      borderLeft: '4px solid hsl(var(--primary))',
+      background: 'hsla(var(--primary), 0.08)',
+      border: '1px solid hsla(var(--primary), 0.2)',
+    }}>
+    <span className="text-2xl"></span>
+    <div>
+      <p className="font-bold text-glow text-base">MetaMask Required to Vote</p>
+      <p className="text-sm opacity-70 mt-0.5">
+        You can browse elections freely. To cast your vote,{' '}
+        <a 
+          href="https://metamask.io/download" 
+          target="_blank" 
+          rel="noreferrer"
+          style={{ color: 'hsl(var(--primary))' }}
+          className="font-semibold underline underline-offset-2 hover:opacity-80 transition-opacity"
+        >
+          install MetaMask
+        </a>
+      </p>
+    </div>
+  </div>
+)}
+{/*end: added a banner when metamask isnt installed on user's browser*/}
+
 
       {/* Main Container */}
       <div className="glass-panel p-6 md:p-8 rounded-2xl mb-8 relative">

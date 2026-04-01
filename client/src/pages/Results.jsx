@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CONTRACT_ADDRESS, CONTRACT_ABI } from '../utils/contractConfig';
 import { BrowserProvider, Contract, JsonRpcProvider } from 'ethers';
 import ThemeToggle from '../components/ThemeToggle';
@@ -11,13 +11,13 @@ export default function ResultsPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const [advancingTime, setAdvancingTime] = useState(false);
+  //const [advancingTime, setAdvancingTime] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
     async function load() {
       try {
-        const provider = window.ethereum ? new BrowserProvider(window.ethereum) : new JsonRpcProvider('http://127.0.0.1:8545');
+        const provider = window.ethereum ? new BrowserProvider(window.ethereum) : new JsonRpcProvider(process.env.REACT_APP_RPC_URL);
         const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
         const countBn = await contract.electionCount();
         const count = Number(countBn.toString());
@@ -56,7 +56,7 @@ export default function ResultsPage() {
     setLoading(true);
     setResults(null);
     try {
-      const provider = window.ethereum ? new BrowserProvider(window.ethereum) : new JsonRpcProvider('http://127.0.0.1:8545');
+      const provider = window.ethereum ? new BrowserProvider(window.ethereum) : new JsonRpcProvider(process.env.REACT_APP_RPC_URL);
       const contract = new Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
 
       const e = await contract.getElection(Number(id));
@@ -108,7 +108,7 @@ export default function ResultsPage() {
       setLoading(false);
     }
   };
-
+/*
   const advanceTime = async () => {
     try {
       setAdvancingTime(true);
@@ -157,7 +157,7 @@ export default function ResultsPage() {
       setAdvancingTime(false);
     }
   };
-
+*/
   useEffect(() => {
     if (selected !== null) fetchResults(selected);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -166,7 +166,7 @@ export default function ResultsPage() {
   return (
     <div className="container">
       <ThemeToggle className="fixed bottom-3 right-3" />
-      <h1 className="text-3xl font-bold mb-6 text-primary">Election Results</h1>
+      <h1 className="text-4xl font-extrabold tracking-tight text-glow mb-6">Election Results</h1>
 
       <div className="mb-4">
         <strong>Total votes cast:</strong> {totalVotes === null ? 'Loading...' : totalVotes}
@@ -226,13 +226,6 @@ export default function ResultsPage() {
         <div className="text-gray-500">Select an election to view results.</div>
       )}
 
-      <button
-        onClick={advanceTime}
-        disabled={advancingTime}
-        className="fixed bottom-4 left-4 px-4 py-2 bg-background text-background rounded hover:bg-orange-600 disabled:bg-gray-400 z-50"
-      >
-        {advancingTime ? 'Advancing Time...' : 'Advance Time (1h)'}
-      </button>
     </div>
   );
 }
