@@ -10,7 +10,7 @@ export default function ResultsPage() {
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
+  const [success] = useState(null);
   //const [advancingTime, setAdvancingTime] = useState(false);
 
   useEffect(() => {
