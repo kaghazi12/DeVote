@@ -39,8 +39,8 @@ async function main() {
   console.log("Current blockchain timestamp:", currentTimestamp);
 
   // Election durations (in seconds)
-  const election1Duration = 600; // 10 seconds for testing
-  const election2Duration = 7200; // 1 hour
+  const election1Duration = 600; // 10 minutes for testing
+  const election2Duration = 94672800; // 3 years
 
   const tx1 = await voting.connect(adminSigner).createElection("Student Council 2025", ["Alice", "Bob", "Charlie"], election1Duration);
   await tx1.wait();

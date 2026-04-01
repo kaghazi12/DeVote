@@ -73,7 +73,7 @@
         "Voting"
       ]
     },
-    "C:\\Users\\Gulraiz\\Desktop\\projs\\isprojvsc\\smart-contracts\\contracts\\Lock.sol": {
+    "C:\\Users\\Gulraiz\\Desktop\\projs\\DeVote\\smart-contracts\\contracts\\Lock.sol": {
       "lastModificationDate": 1765443537041,
       "contentHash": "7eee587c347fe6b1de50c96688cb9477",
       "sourceName": "contracts/Lock.sol",
@@ -109,7 +109,7 @@
         "Lock"
       ]
     },
-    "C:\\Users\\Gulraiz\\Desktop\\projs\\isprojvsc\\smart-contracts\\contracts\\Voting.sol": {
+    "C:\\Users\\Gulraiz\\Desktop\\projs\\DeVote\\smart-contracts\\contracts\\Voting.sol": {
       "lastModificationDate": 1774989266737,
       "contentHash": "72823578255e46ce862b08a44983fe10",
       "sourceName": "contracts/Voting.sol",
