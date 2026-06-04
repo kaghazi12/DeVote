@@ -175,7 +175,7 @@ export default function ResultsPage() {
       {error && <div className="text-red-500 mb-4 p-3 bg-red-900 bg-opacity-20 rounded">❌ {error}</div>}
       {success && <div className="text-green-500 mb-4 p-3 bg-green-900 bg-opacity-20 rounded">✓ {success}</div>}
 
-      <div className="mb-4 flex items-center gap-3">
+      <div className="mb-4 sm:flex sm:items-center gap-3 grid grid-cols-2">
         <label className="mr-2">Select Election:</label>
         <select value={selected ?? ''} onChange={(e) => setSelected(Number(e.target.value))} className="border p-2 rounded text-forground bg-background">
           {elections.map((el) => (
